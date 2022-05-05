@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'updated',
   });
   BlogPost.associate = (models) => {
-    BlogPost.belongsTo(models.Users,
+    BlogPost.belongsTo(models.User,
       { foreignKey: 'userId', as: 'user' });
   };
   return BlogPost;

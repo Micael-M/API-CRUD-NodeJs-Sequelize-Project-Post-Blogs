@@ -1,5 +1,6 @@
 const express = require('express');
 const userController = require('./controllers/userController');
+const { validName, validEmail, validPassword } = require('./controllers/middlewares/userValidate');
 // const jwtAuth = require('./controllers/middlewares/jwtAuth');
 
 const app = express();
@@ -11,6 +12,6 @@ app.get('/', (request, response) => {
 });
 
 // Requisite 1 post - /user
-app.post('/user', userController.createUser);
+app.post('/user', validName, validEmail, validPassword, userController.createUser);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));

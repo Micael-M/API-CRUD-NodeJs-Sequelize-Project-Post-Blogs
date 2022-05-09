@@ -3,7 +3,7 @@ const userController = require('./controllers/userController');
 const loginController = require('./controllers/loginController');
 const { validName, validEmail, validPassword } = require('./controllers/middlewares/userValidate');
 const { loginValidate } = require('./controllers/middlewares/loginValidate');
-// const jwtAuth = require('./controllers/middlewares/jwtAuth');
+const jwtAuth = require('./controllers/middlewares/jwtAuth');
 
 const app = express();
 app.use(express.json());
@@ -15,6 +15,8 @@ app.get('/', (request, response) => {
 
 // Requisite 1 post - /user
 app.post('/user', validName, validEmail, validPassword, userController.createUser);
+// Requisite 3 get - /user
+app.get('/user', jwtAuth, userController.getUsers);
 
 // Requisite 2 post - /login
 app.post('/login', loginValidate, loginController.login);

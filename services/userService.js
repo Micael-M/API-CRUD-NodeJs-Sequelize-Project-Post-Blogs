@@ -1,8 +1,8 @@
-const { User } = require('../models');
+const { Users } = require('../models');
 const jwt = require('../auth/validateJWT');
 
 const userCreate = async (displayName, email, password, image) => {
-  const getUsers = await User.findAll();
+  const getUsers = await Users.findAll();
   // O email é uma informação que não pode esxitir ao cadastrar um novo user
   const verifyEmail = getUsers.find((user) => user.email === email);
   if (verifyEmail) {
@@ -12,18 +12,25 @@ const userCreate = async (displayName, email, password, image) => {
       },
     };
   }
-  await User.create({ displayName, email, password, image });
+  await Users.create({ displayName, email, password, image });
   const token = jwt.createToken({ email });
   return token;
 };
 
 const getUsers = async () => {
-  const result = await User.findAll({ attributes: { exclude: ['password'] } });
+  const result = await Users.findAll({ attributes: { exclude: ['password'] } });
+  return result;
+};
+
+const getByEmail = async (email) => {
+  const result = await Users.findOne({
+    where: { email }, attributes: { exclude: ['password', 'image', 'displayName'] },
+  });
   return result;
 };
 
 const userById = async (id) => {
-  const result = await User.findByPk(id);
+  const result = await Users.findByPk(id);
   if (result === null) {
     return {
       error: {
@@ -37,4 +44,5 @@ module.exports = {
   userCreate,
   getUsers,
   userById,
+  getByEmail,
 };

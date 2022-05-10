@@ -9,14 +9,11 @@ module.exports = {
       },
       displayName: {
         type: Sequelize.STRING,
-        allowNull: false
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false
       },
       password: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       image: {
@@ -24,7 +21,7 @@ module.exports = {
       },
     });
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     await queryInterface.dropTable('Users');
   }
 };

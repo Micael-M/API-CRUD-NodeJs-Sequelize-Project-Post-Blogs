@@ -1,5 +1,5 @@
 const userService = require('../services/userService');
-const jwt = require('../auth/validateJWT');
+// const jwt = require('../auth/validateJWT');
 
 // Requisite 1
 const createUser = async (req, res) => {
@@ -10,14 +10,19 @@ const createUser = async (req, res) => {
 };
 
 // Requisite 3 - get Users
-const getUsers = async (_req, res) => {
-  const result = await userService.getUsers();
-  return res.status(200).json(result);
+const getUsers = async (req, res) => {
+  try {
+    const result = await userService.getUsers();
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json(err.message);
+  }
+  // const token = req.headers.authorization;
+  // if (!token) return res.status(401).json({ message: 'Token not found' });
 };
 
 const userById = async (req, res) => {
   const token = req.headers.authorization;
-  console.log('passei');
   const { id } = req.params;
   const result = await userService.userById(id);
   if (result.error) {

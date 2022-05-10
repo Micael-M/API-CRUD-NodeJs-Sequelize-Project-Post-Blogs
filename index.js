@@ -15,8 +15,12 @@ app.get('/', (request, response) => {
 
 // Requisite 1 post - /user
 app.post('/user', validName, validEmail, validPassword, userController.createUser);
+
 // Requisite 3 get - /user
 app.get('/user', jwtAuth, userController.getUsers);
+
+// Requisite 4 get /user/:id
+app.get('/user/:id', userController.userById);
 
 // Requisite 2 post - /login
 app.post('/login', loginValidate, loginController.login);

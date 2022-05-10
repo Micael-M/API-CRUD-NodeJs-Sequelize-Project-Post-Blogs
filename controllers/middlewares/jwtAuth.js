@@ -13,6 +13,7 @@ const jwtAuth = async (req, res, next) => {
     const { email } = jwt.verify(token, JWT_SECRET);
     const verifyEmail = await User.findOne({ where: { email } });
     if (!verifyEmail) throw new Error();
+
     return next();
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });

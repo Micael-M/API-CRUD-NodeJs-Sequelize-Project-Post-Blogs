@@ -28,8 +28,8 @@ app.get('/user/:id', jwtAuth, userController.userById);
 // Requisite 2 post - /login
 app.post('/login', loginValidate, loginController.login);
 
-// // Requisite 5 post - /categories
-// app.post('/categories', categoryController.login);
+// Requisite 5 post - /categories
+app.post('/categories', jwtAuth, categoryController.createCategory);
 
 // Requisite 6 get - /categories
 app.get('/categories', jwtAuth, categoryController.getCategories);

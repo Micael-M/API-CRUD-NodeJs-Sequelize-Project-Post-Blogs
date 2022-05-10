@@ -11,33 +11,18 @@ const createUser = async (req, res) => {
 
 // Requisite 3 - get Users
 const getUsers = async (req, res) => {
-  try {
-    const result = await userService.getUsers();
-    return res.status(200).json(result);
-  } catch (err) {
-    return res.status(500).json(err.message);
-  }
-  // const token = req.headers.authorization;
-  // if (!token) return res.status(401).json({ message: 'Token not found' });
+  const result = await userService.getUsers();
+  return res.status(200).json(result);
 };
 
+// Requisite 4 - get Users
 const userById = async (req, res) => {
-  const token = req.headers.authorization;
   const { id } = req.params;
   const result = await userService.userById(id);
   if (result.error) {
     return res.status(404).json(result.error);
   }
-  if (!token) return res.status(401).json({ message: 'Token not found' });
   return res.status(200).json(result);
-
-// tentar fazer um miiddleware só para testar isso
-  // try {
-  //   jwt.decodeToken(token);
-  //   return res.status(200).json(result);
-  // } catch (err) {
-  //   return res.status(401).json({ message: 'Expired or invalid token' });
-  // }
 };
 module.exports = {
   createUser,

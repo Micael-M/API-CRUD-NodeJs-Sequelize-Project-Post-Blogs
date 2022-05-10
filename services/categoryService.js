@@ -5,6 +5,13 @@ const getCategories = async () => {
   return result;
 };
 
+// Requisite 5 
+const createCategory = async (name) => {
+  const result = await Category.create({ name });
+  return result;
+};
+
 module.exports = {
   getCategories,
+  createCategory,
 };

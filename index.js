@@ -2,11 +2,12 @@ const express = require('express');
 const userController = require('./controllers/userController');
 const loginController = require('./controllers/loginController');
 const categoryController = require('./controllers/categoryController');
-// const postController = require('./controllers/postController');
+const postController = require('./controllers/postController');
 
 const { validName, validEmail, validPassword } = require('./controllers/middlewares/userValidate');
 const { loginValidate } = require('./controllers/middlewares/loginValidate');
 const jwtAuth = require('./controllers/middlewares/jwtAuth');
+const postValidate = require('./controllers/middlewares/postValidate');
 
 const app = express();
 app.use(express.json());
@@ -34,8 +35,8 @@ app.post('/categories', jwtAuth, categoryController.createCategory);
 // Requisite 6 get - /categories
 app.get('/categories', jwtAuth, categoryController.getCategories);
 
-// // Requisite 7 post - /categories
-// app.post('/post', postController.login);
+// Requisite 7 post - /categories
+app.post('/post', postValidate, jwtAuth, postController.createPost);
 
 // // Requisite 8 get /post
 // app.get('/post', postController.getPost);

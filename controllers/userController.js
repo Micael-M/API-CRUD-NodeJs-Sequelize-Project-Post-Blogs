@@ -1,5 +1,4 @@
 const userService = require('../services/userService');
-// const jwt = require('../auth/validateJWT');
 
 // Requisite 1
 const createUser = async (req, res) => {

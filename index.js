@@ -42,7 +42,7 @@ app.post('/post', jwtAuth, postValidate, validCategory, postController.createPos
 // Requisite 8 get /post
 app.get('/post', jwtAuth, postController.getPosts);
 
-// // Requisite 9 get /post/:id
-// app.get('/post/:id', postController.userById);
+// Requisite 9 get /post/:id
+app.get('/post/:id', jwtAuth, postController.postById);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));

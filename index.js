@@ -39,8 +39,8 @@ app.get('/categories', jwtAuth, categoryController.getCategories);
 // Requisite 7 post - /categories
 app.post('/post', jwtAuth, postValidate, validCategory, postController.createPost);
 
-// // Requisite 8 get /post
-// app.get('/post', postController.getPost);
+// Requisite 8 get /post
+app.get('/post', jwtAuth, postController.getPosts);
 
 // // Requisite 9 get /post/:id
 // app.get('/post/:id', postController.userById);

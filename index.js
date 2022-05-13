@@ -50,7 +50,10 @@ app.get('/post/:id', jwtAuth, postController.postById);
 // Requisite 10 put /post/:id
 app.put('/post/:id', jwtAuth, authorizeUser, postController.putPost);
 
-// Requisite 11 del /post/:id
+// Requisite 11 delete /post/:id
 app.delete('/post/:id', jwtAuth, authorizeDel, postController.delPost);
+
+// Requisite 12 delete /post/:id
+app.delete('/user/:me', jwtAuth, userController.deleteUser);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));

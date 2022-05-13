@@ -9,7 +9,6 @@ module.exports = async (req, res, next) => {
 
   const result = await postService.postById(id);
   if (result.userId !== userId) {
-  console.log('Não autorizado');
   return res.status(401).json({ message: 'Unauthorized user' });
   }
   next();

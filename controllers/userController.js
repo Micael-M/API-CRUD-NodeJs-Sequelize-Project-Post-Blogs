@@ -23,8 +23,17 @@ const userById = async (req, res) => {
   }
   return res.status(200).json(result);
 };
+
+// Requisite 12 - delete user/me
+const deleteUser = async (req, res) => {
+  const { id } = req.user;
+  await userService.deleteUser(id);
+  res.status(204).end();
+};
+
 module.exports = {
   createUser,
   getUsers,
   userById,
+  deleteUser,
 };

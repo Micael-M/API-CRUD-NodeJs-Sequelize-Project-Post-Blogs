@@ -40,9 +40,14 @@ const userById = async (id) => {
   }
   return result;
 };
+
+// Requisite 12 - delete user/me
+const deleteUser = (id) => Users.destroy({ where: { id } });
+
 module.exports = {
   userCreate,
   getUsers,
   userById,
   getByEmail,
+  deleteUser,
 };

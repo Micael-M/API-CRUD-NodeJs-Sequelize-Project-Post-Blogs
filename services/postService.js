@@ -61,9 +61,11 @@ const putPost = async (title, content, id) => {
   return result;
 };
 
+const delPost = async (id) => BlogPost.destroy({ where: { id } });
 module.exports = {
   createPost,
   getPosts,
   postById,
   putPost,
+  delPost,
 };

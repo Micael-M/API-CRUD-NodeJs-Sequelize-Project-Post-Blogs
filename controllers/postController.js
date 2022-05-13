@@ -25,16 +25,25 @@ const postById = async (req, res) => {
   return res.status(200).json(result);
 };
 
-// Requisite 10 - get /post/id
+// Requisite 10 - put /post/id
 const putPost = async (req, res) => {
   const { title, content } = req.body;
   const { id } = req.params;
   const result = await postService.putPost(title, content, id);
   return res.status(200).json(result);
 };
+
+// Requisite 11 - del /post/id
+const delPost = async (req, res) => {
+  const { id } = req.params;
+  await postService.delPost(id);
+  return res.status(204).end();
+};
+
 module.exports = {
   createPost,
   getPosts,
   postById,
   putPost,
+  delPost,
 };

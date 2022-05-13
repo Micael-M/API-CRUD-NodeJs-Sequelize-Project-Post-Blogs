@@ -10,6 +10,7 @@ const jwtAuth = require('./controllers/middlewares/jwtAuth');
 const postValidate = require('./controllers/middlewares/postValidate');
 const validCategory = require('./controllers/middlewares/validCategory');
 const authorizeUser = require('./controllers/middlewares/authorizeUser');
+const authorizeDel = require('./controllers/middlewares/authorizeDel');
 
 const app = express();
 app.use(express.json());
@@ -48,5 +49,8 @@ app.get('/post/:id', jwtAuth, postController.postById);
 
 // Requisite 10 put /post/:id
 app.put('/post/:id', jwtAuth, authorizeUser, postController.putPost);
+
+// Requisite 11 del /post/:id
+app.delete('/post/:id', jwtAuth, authorizeDel, postController.delPost);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));

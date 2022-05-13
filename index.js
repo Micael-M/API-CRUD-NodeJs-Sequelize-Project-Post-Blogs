@@ -9,6 +9,7 @@ const { loginValidate } = require('./controllers/middlewares/loginValidate');
 const jwtAuth = require('./controllers/middlewares/jwtAuth');
 const postValidate = require('./controllers/middlewares/postValidate');
 const validCategory = require('./controllers/middlewares/validCategory');
+const authorizeUser = require('./controllers/middlewares/authorizeUser');
 
 const app = express();
 app.use(express.json());
@@ -44,5 +45,8 @@ app.get('/post', jwtAuth, postController.getPosts);
 
 // Requisite 9 get /post/:id
 app.get('/post/:id', jwtAuth, postController.postById);
+
+// Requisite 10 put /post/:id
+app.put('/post/:id', jwtAuth, authorizeUser, postController.putPost);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));

@@ -24,10 +24,11 @@ const getPosts = async () => {
       { model: Users, as: 'user', attributes: { exclude: ['password'] } },
       { model: Category, as: 'categories', through: { attributes: [] } },
     ],
-  }); // { attributes: { exclude: ['UserId'] } }
+  });
   return result;
 };
 
+// Requisite 9 - get /post/id
 const postById = async (id) => {
   const result = await BlogPost.findByPk(id, {
     include: [
@@ -35,14 +36,7 @@ const postById = async (id) => {
       { model: Category, as: 'categories', through: { attributes: [] } },
     ],
   });
-  console.log('Não tem um id válido');
-  console.log(result);
   if (!result) {
-    console.log(result);
-    // const error = new Error();
-    // error.message = 'Post does not exist';
-    // error.code = 'postNotFound';
-    // throw error;
     return {
       error: {
         message: 'Post does not exist',
@@ -52,8 +46,24 @@ const postById = async (id) => {
   return result;
 };
 
+// Requisite 10 - get /post/id
+const putPost = async (title, content, id) => {
+  const result = await BlogPost.findByPk(id, { 
+    include: [
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+  result.title = title;
+  result.content = content;
+
+  // Atualizando as informações
+  await result.save();
+  return result;
+};
+
 module.exports = {
   createPost,
   getPosts,
   postById,
+  putPost,
 };

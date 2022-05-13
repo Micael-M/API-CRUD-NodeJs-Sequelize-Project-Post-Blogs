@@ -17,6 +17,7 @@ const getPosts = async (_req, res) => {
   return res.status(200).json(result);
 };
 
+// Requisite 9 - get /post/id
 const postById = async (req, res) => {
   const { id } = req.params;
   const result = await postService.postById(id);
@@ -24,8 +25,16 @@ const postById = async (req, res) => {
   return res.status(200).json(result);
 };
 
+// Requisite 10 - get /post/id
+const putPost = async (req, res) => {
+  const { title, content } = req.body;
+  const { id } = req.params;
+  const result = await postService.putPost(title, content, id);
+  return res.status(200).json(result);
+};
 module.exports = {
   createPost,
   getPosts,
   postById,
+  putPost,
 };
